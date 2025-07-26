@@ -12,6 +12,7 @@ The multi-task architecture is justified by the inherent relationship between DR
 • Leverage shared representations: Features learned for segmentation (e.g., detecting exudates) can benefit classification (e.g., grading severity based on exudate presence). 
 • Improve generalization: Learning multiple related tasks can lead to more robust and generalizable feature extractors. 
 • Efficiency: A single model performs two tasks, reducing computational overhead compared to separate models 
+
 **Dataset Handling and Preprocessing** 
 The project utilizes the IDRiD (Indian Diabetic Retinopathy Image Dataset), which provides both retinal images, corresponding segmentation masks for various lesions, and disease grading labels. 
 Dataset Structure: 
@@ -27,6 +28,7 @@ Data Augmentation Strategy:
 To enhance robustness, training augmentations include: 
 • Geometric Augmentations: HorizontalFlip, VerticalFlip, RandomRotate90, Transpose, ShiftScaleRotate, ElasticTransform, GridDistortion.  
 • Color Augmentations: GaussNoise, ISONoise, MultiplicativeNoise, ColorJitter.  
+
 **Training and Evaluation Strategy** 
 Training Configuration: 
 • Optimizer: Adam with learning rate 1e-4, weight decay 1e-5 
@@ -49,10 +51,12 @@ Intersection over Union (IoU): The iou_score function calculates this metric, ap
 Dice Score: Another common metric for segmentation, especially useful for imbalanced classes. It is closely related to IoU. The dice_score function calculates this with a threshold of 0.3. 
 The Trainer class tracks these metrics over epochs and uses a combined metric to determine the "best" model for saving and for learning rate scheduling. 
 Training curves visualization for convergence analysis 
+
 **Visualizations of Results**
 • Ground Truth Analysis (visualize_sample): Displays original images, binarized, and raw ground truth masks to verify data loading and preprocessing. 
 • Prediction Comparison(visualize_predictions): Shows original image, ground truth masks, and binarized predicted masks, enabling qualitative assessment of segmentation performance. 
 • Training Dynamics (plot_training_curves): Plots training losses (total, classification, segmentation) and validation metrics (accuracy, IoU) over epochs. These curves help monitor convergence, identify overfitting, and assess generalization ability. 
+
 **Conclusion** 
 This multi-task vision model represents a comprehensive approach to diabetic retinopathy analysis, combining disease grading and lesion segmentation in a unified framework. The architecture leverages proven components (ResNet-50, U-Net) while incorporating modern techniques (mixture of experts) for enhanced performance. The robust preprocessing pipeline and extensive visualization capabilities ensure reliable training and interpretable results, making it suitable for both research and clinical applications. 
 The modular design allows for easy adaptation to different datasets and task combinations, while the comprehensive evaluation framework provides thorough performance assessment across multiple metrics and visualization modalities. 
